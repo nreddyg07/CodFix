@@ -54,29 +54,40 @@ Make sure the following are installed:
 
 ## ⚙️ Installation & Setup
 ### 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/nreddyg07/CodFix.git
-
 cd CodFix
+```
 
 ### 2️⃣ Create Virtual Environment
 **Linux / macOS**
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
+```bash
 **Windows**
 python -m venv venv
 venv\Scripts\activate
+```
 
 ### 3️⃣ Install Python Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 ### 4️⃣ Install Node Dependencies
+```bash
 npm install
+```
 
 ## 🚀 Running the Application
 CodFix uses concurrently to run both the React frontend and Python backend at the same time.
 ### ▶️ Start Frontend + Backend Together
+```bash
 npm start
+```
 
 This single command will:
 - Start the React frontend using react-scripts
@@ -85,8 +96,9 @@ This single command will:
 
 🌐 Access the Application
 Once started, open your browser at:
+```bash
 http://localhost:3000
-
+```
 The backend runs internally and is proxied to the frontend.
 
 ## 🧠 Model Training
