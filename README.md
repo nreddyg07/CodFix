@@ -59,15 +59,12 @@ git clone https://github.com/nreddyg07/CodFix.git
 cd CodFix
 
 ### 2️⃣ Create Virtual Environment
-Linux / macOS
-
+**Linux / macOS**
 python3 -m venv venv
-
 source venv/bin/activate
 
-Windows
+**Windows**
 python -m venv venv
-
 venv\Scripts\activate
 
 ### 3️⃣ Install Python Dependencies
