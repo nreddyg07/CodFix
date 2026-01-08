@@ -6,41 +6,44 @@ It consists of a **React frontend** for user interaction and a **Python backend*
 ---
 
 ## 📁 Project Structure
+```
+
 CodFix/
 │
 ├── public/
-│ ├── index.html # Main HTML file
-│ └── project_icon.png # Application icon
+│   ├── index.html                  # Main HTML file
+│   └── project_icon.png            # Application icon
 │
 ├── src/
-│ ├── components/
-│ │ ├── EditorPanel.js # Code editor UI
-│ │ ├── EditorPanel.css
-│ │ ├── Navbar.js # Navigation bar
-│ │ ├── Navbar.css
-│ │ ├── OutputPanel.js # Output display
-│ │ ├── OutputPanel.css
-│ │ ├── Tabs.js # Tabs for features
-│ │ └── Tabs.css
-│ │
-│ ├── App.js # Root React component
-│ ├── App.css
-│ ├── index.js # React entry point
-│ ├── project_icon.png
-│ └── setupProxy.js # Proxy for backend API calls
+│   ├── components/
+│   │   ├── EditorPanel.js           # Code editor UI
+│   │   ├── EditorPanel.css
+│   │   ├── Navbar.js                # Navigation bar
+│   │   ├── Navbar.css
+│   │   ├── OutputPanel.js           # Output / results display
+│   │   ├── OutputPanel.css
+│   │   ├── Tabs.js                  # Feature tabs
+│   │   └── Tabs.css
+│   │
+│   ├── App.js                       # Root React component
+│   ├── App.css
+│   ├── index.js                     # React entry point
+│   ├── project_icon.png
+│   └── setupProxy.js                # Proxy for backend API calls
 │
-├── App.py # Python backend entry point
+├── App.py                           # Python backend entry point
 │
-├── code_completion_training.py # Code completion model training
-├── debugging_training.py # Debugging model training
-├── testcase_generation.py # Testcase generation logic
-├── scrapping.py # Dataset preprocessing
+├── code_completion_training.py      # Code completion model training
+├── debugging_training.py            # Bug detection / debugging model training
+├── testcase_generation.py           # Testcase generation logic
+├── scrapping.py                     # Dataset scraping / preprocessing
 │
-├── requirements.txt # Python dependencies
-├── package.json # React dependencies
+├── requirements.txt                 # Python dependencies
+├── package.json                     # React dependencies
 ├── package-lock.json
 └── README.md
 
+````
 ---
 
 ## 🛠 Prerequisites
@@ -66,8 +69,8 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-```bash
 **Windows**
+```bash
 python -m venv venv
 venv\Scripts\activate
 ```
