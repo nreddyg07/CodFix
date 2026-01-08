@@ -3,7 +3,6 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
 import torch
-from validator import validate_and_correct_code
 
 # ====================
 # Load Models
@@ -25,7 +24,7 @@ testcase_tokenizer = AutoTokenizer.from_pretrained(TESTCASE_MODEL_PATH, local_fi
 testcase_model = AutoModelForSeq2SeqLM.from_pretrained(TESTCASE_MODEL_PATH, local_files_only=True)
 
 
-def generate_with_codegen(model, tokenizer, code: str, max_length=1000, language="java") -> str:
+def generate_with_codegen_code_completion(model, tokenizer, code: str, max_length=1000, language="java") -> str:
     inputs = tokenizer(code, return_tensors="pt").to(model.device)
     outputs = model.generate(
         **inputs,
@@ -53,22 +52,28 @@ def generate_with_codet5_debugging(model, tokenizer, code: str, max_length=1000,
 #        decoded = trim_after_function(decoded)
     return decoded
 
-def generate_with_codet5_testcase(model, tokenizer, code: str, max_length=1000, language="java") -> str:
-    inputs = tokenizer(code, return_tensors="pt").to(model.device)
-    outputs = model.generate(
-        **inputs,
-        max_length=max_length,
-        num_beams=4,
-        early_stopping=True
-    )
+def generate_with_codet5_testcase(model, tokenizer, code: str, max_new_tokens=256, language="java") -> str:
+    """
+    Generate structured test cases (NOT code)
+    """
+    inputs = tokenizer(code, return_tensors="pt", truncation=True,max_length=512).to(model.device)
+    with torch.no_grad():
+        outputs = model.generate(
+            input_ids=inputs["input_ids"],
+            attention_mask=inputs["attention_mask"],
+            max_new_tokens=max_new_tokens,
+            num_beams=5,          # ✅ match standalone version
+            early_stopping=True
+        )
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
+#    if language.lower() in ["java"]:
+#        decoded = trim_after_function(decoded)
     return decoded
 
 def trim_after_function(decoded: str) -> str:
     brace_count = 0
     trimmed_code = []
     inside_function = False
-
     for line in decoded.splitlines():
         trimmed_code.append(line)
         if '{' in line:
@@ -97,7 +102,7 @@ async def completion(request: Request):
     code = data.get("code", "")
     language = data.get("language", "java")
     description = data.get("description", "")
-    validated = validate_and_correct_code(code, mode="completion", language=language, description=description)
+    validated = generate_with_codegen_code_completion(code, mode="completion", language=language, description=description)
     return {"result": validated["code"]}
 
 @app.post("/debugging")
@@ -106,7 +111,7 @@ async def debugging(request: Request):
     code = data.get("code", "")
     language = data.get("language", "java")
     description = data.get("description", "")
-    validated = validate_and_correct_code(code, mode="debugging", language=language, description=description)
+    validated = generate_with_codet5_debugging(code, mode="debugging", language=language, description=description)
     return {"result": validated["code"]}
 
 @app.post("/testcase")
@@ -116,7 +121,7 @@ async def testcase(request: Request):
     language = data.get("language", "java")
     description = data.get("description", "")
     num_cases = data.get("num_cases", 5)
-    validated = validate_and_correct_code(code, mode="testcase", language=language, description=description,num_cases=num_cases)
+    validated = generate_with_codet5_testcase(code, mode="testcase", language=language, description=description,num_cases=num_cases)
     return {"result": validated["code"]}
 
 
