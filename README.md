@@ -244,7 +244,7 @@ npm start
 
 **Guided by**  
 Dr. Hemavathi P  
-Professor, CSE
+Professor, CSE 
 Bangalore Institute of Technology
 
 ---
