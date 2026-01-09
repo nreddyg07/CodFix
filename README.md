@@ -82,7 +82,7 @@ CodFix/
 ├── code_completion_training.py      # Code completion training script
 ├── debugging_training.py            # Debugging model training script
 ├── testcase_generation.py           # Testcase generation logic
-├── scrapping.py                     # Dataset scraping / preprocessing
+├── scrapping.py                     # Dataset preprocessing
 │
 ├── requirements.txt                 # Python dependencies
 ├── package.json                     # Frontend & concurrent scripts
