@@ -1,4 +1,3 @@
-```markdown
 # 🧠 CodFix – AI-Powered Code Intelligence Platform
 
 CodFix is a full-stack AI-powered web application designed to assist developers with **intelligent code completion**, **bug detection and debugging**, and **automatic testcase generation**. By leveraging pre-trained machine learning models and an interactive web interface, CodFix streamlines common software development tasks and improves coding efficiency and reliability.
@@ -36,7 +35,7 @@ By combining AI-driven models with a user-friendly interface, CodFix provides an
 
 ### Backend
 - Python 3.8+
-- Flask (API handling)
+- FastAPI (API handling)
 - Machine Learning models (pre-trained)
 - NumPy, Pandas (data handling)
 
