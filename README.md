@@ -211,6 +211,47 @@ The local application uses **pre-trained models only**.
 
 ---
 
+---
+
+## 📊 Dataset
+
+The dataset used for training the CodFix models was collected and prepared using custom scraping and preprocessing scripts.
+
+**Dataset Source:**  
+🔗 [<DATASET_LINK>](https://drive.google.com/drive/folders/1c_y5aVEIcUV7rsGFOpFTKVVVxY_XwhcW?usp=drive_link)
+
+### Dataset Description
+
+The dataset consists of code snippets collected from various programming resources and repositories. It includes examples of:
+
+- Correct code implementations
+- Code with bugs and debugging examples
+- Code snippets for completion tasks
+- Programs used for testcase generation
+
+### Dataset Preparation
+
+The dataset was prepared using:
+
+- `scrapping.py` — Collects and preprocesses code samples
+- Cleaning and formatting of source code
+- Structuring code snippets for training tasks such as:
+  - Code completion
+  - Debugging
+  - Testcase generation
+
+### Dataset Usage
+
+The dataset was used during **model training in Google Colab** to train the following components:
+
+- Code Completion Model
+- Debugging Assistance Model
+- Testcase Generation Model
+
+Due to computational requirements, training was performed on **Google Colab GPU environments**.
+
+---
+
 ## 🧪 Final Execution Flow
 
 ```bash
